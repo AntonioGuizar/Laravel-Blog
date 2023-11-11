@@ -19,6 +19,7 @@ Auth::routes();
 Route::redirect('/', '/posts');
 Route::get('posts', [PostController::class, 'index'])->name('post.index');
 Route::get('posts/{id}', [PostController::class, 'show'])->where('id', '[0-9]+')->name('post.show');
+Route::get('posts/category/{id}', [PostController::class, 'postsByCategory'])->where('id', '[0-9]+')->name('post.category');
 Route::get('posts/search', [PostController::class, 'search'])->name('post.search');
 
 Route::middleware('auth:sanctum')->group(function () {
