@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PostsSeeder extends Seeder
@@ -14,28 +13,23 @@ class PostsSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
         for ($i = 0; $i < 5; ++$i) {
-            // content is equal to 4 paragraphs of text separated by a line break
+            $summary = implode(' ', $faker->sentences(3));
             $content = implode(' ', $faker->paragraphs(4));
+            $this->execInBackground('wget https://picsum.photos/1280/480 -O public/storage/images/posts/' . $i . '.jpg');
             \App\Models\Post::create([
                 'title' => $faker->sentence,
+                'summary' => $summary,
                 'content' => $content,
                 'author_id' => 1,
-                'image_path' => $faker->imageUrl(640, 480, 'cats'),
-            ]);
-            $content = implode(' ', $faker->paragraphs(4));
-            \App\Models\Post::create([
-                'title' => $faker->sentence,
-                'content' => $content,
-                'author_id' => 2,
-                'image_path' => $faker->imageUrl(640, 480, 'cats'),
-            ]);
-            $content = implode(' ', $faker->paragraphs(4));
-            \App\Models\Post::create([
-                'title' => $faker->sentence,
-                'content' => $content,
-                'author_id' => 3,
-                'image_path' => $faker->imageUrl(640, 480, 'cats'),
+                'category_id' => 1,
+                'image_path' => 'images/posts/' . $i . '.jpg'
             ]);
         }
+    }
+
+    function execInBackground($cmd)
+    {
+        $cmd = escapeshellcmd($cmd);
+        exec($cmd . " > /dev/null &");
     }
 }
