@@ -6,7 +6,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <img src="{{ $post->image_path }}" class="card-img-top img-fluid w-75 d-block mx-auto py-5" alt="Post Image">
+                <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top img-fluid w-75 d-block mx-auto py-5" alt="Post Image">
             </div>
             <div class="col-md-8">
                 <h2>Contenido</h2>

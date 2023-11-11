@@ -14,15 +14,40 @@
                         </ul>
                     </div>
                 @endif
-                <div class="card p-3">
-                    <label for="Autor">Autor</label>
-                    <span class="h5">{{ Auth::user()->name }}</span>
-                    <label for="floatingInput">Titulo</label>
-                    <input class="form-control" type="text" name="title" required>
-                    <label for="floatingTextArea">Contenido</label>
-                    <textarea class="form-control" name="content" id="floatingTextarea" cols="30" rows="10" required></textarea>
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="mb-3">
+                            <label for="Autor">Autor</label>
+                            <span class="h5">{{ Auth::user()->name }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="floatingInput">Titulo</label>
+                            <input class="form-control" type="text" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="floatingInput">Categoria</label>
+                            <select class="form-select" name="category_id" required>
+                                <option value="">Selecciona una categoria</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="floatingTextArea">Resumen</label>
+                            <textarea class="form-control" name="summary" id="floatingTextarea" cols="30" rows="10" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="floatingTextArea">Contenido</label>
+                            <textarea class="form-control" name="content" id="floatingTextarea" cols="30" rows="10" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="floatingInput">Imagen</label>
+                            <input class="form-control" type="file" name="image" required>
+                        </div>
+                            <button class="btn btn-secondary m-3">Guardar</button>
+                    </div>
                 </div>
-                <button class="btn btn-secondary m-3">Guardar</button>
             </form>
         </section>
     </div>
